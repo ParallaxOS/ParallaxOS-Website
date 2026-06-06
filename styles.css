@@ -735,32 +735,6 @@ p { color: var(--text-secondary); font-size: 14px; line-height: 1.7; }
 .agent h4 { font-size: 14px; margin-bottom: 6px; }
 .agent p { font-size: 12px; line-height: 1.55; color: var(--text-tertiary); }
 
-/* -------- Step list (demo flow) -------- */
-.steps {
-  display: grid; gap: 8px;
-  grid-template-columns: 1fr;
-  max-width: 880px;
-  margin: 0 auto;
-}
-.step-row {
-  display: grid;
-  grid-template-columns: 60px 160px 1fr;
-  gap: 18px;
-  align-items: center;
-  background: var(--bg-card);
-  border: 1px solid var(--border-default);
-  border-radius: var(--r-lg);
-  padding: 16px 20px;
-}
-.step-row .num { font-family: var(--font-mono); font-size: 13px; color: var(--brand); font-weight: 700; }
-.step-row .name { font-weight: 600; font-size: 14px; }
-.step-row .name small { display: block; color: var(--text-tertiary); font-size: 11px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
-.step-row .key { color: var(--text-secondary); font-size: 13px; }
-@media (max-width: 720px) {
-  .step-row { grid-template-columns: 1fr; gap: 4px; }
-  .step-row .num { font-size: 11px; }
-}
-
 /* -------- Stats strip -------- */
 .stat-strip {
   display: grid;

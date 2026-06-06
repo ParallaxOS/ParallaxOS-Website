@@ -1,4 +1,0 @@
-427:     <div class="container">
-428:       <div class="cta-banner reveal">
-429:         <span class="eyebrow"><span class="dot"></span> Ready when you are</span>
-430:         <h2>

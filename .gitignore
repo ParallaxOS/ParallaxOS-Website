@@ -49,3 +49,8 @@ assets/parallaxos-lockup-tx.png
 # Misc
 *.log
 .history/
+
+# Junk / backups — never commit (audited out 2026-06)
+*.zip
+.fuse_hidden*
+_cta_dump.txt

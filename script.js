@@ -107,10 +107,15 @@
     setEdge();
   }
 
-  // ---- Contact form (client-side validation only; production wires to backend) ----
+  // ---- Contact form → Supabase request-demo edge function ----
+  // Anon key is the public, RLS-protected project key (same one shipped in the
+  // app bundle); the edge function does its own authorization + rate limiting.
+  var SUPABASE_URL = 'https://ehmbjfrndqwaavqljxqa.supabase.co';
+  var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVobWJqZnJuZHF3YWF2cWxqeHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MDE5ODMsImV4cCI6MjA5NDA3Nzk4M30.TZeV7vwmb6XOkenC3kIq653q47qZikoKwnzMj_Dw5w4';
   var form = document.querySelector('form[data-contact]');
   if (form) {
     var status = form.querySelector('.form-status');
+    var submitBtn = form.querySelector('[type="submit"]');
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var data = Object.fromEntries(new FormData(form));
@@ -118,11 +123,39 @@
         if (status) { status.textContent = 'Please complete all required fields.'; status.style.color = 'var(--status-blocked)'; }
         return;
       }
-      if (status) {
-        status.style.color = 'var(--status-cleared)';
-        status.textContent = 'Thanks ' + data.name + ' — your enquiry has been received. The Parallax team will reply within one business day.';
-      }
-      form.reset();
+      // The function stores name/email/company/role/why_interested — fold the
+      // extra fields (worker count, networks, mobile) into why_interested.
+      var why = (data.message || '').trim();
+      var ctx = [];
+      if (data.workers)  ctx.push('Workers: ' + data.workers);
+      if (data.networks) ctx.push('Networks: ' + data.networks);
+      if (data.phone)    ctx.push('Mobile: ' + data.phone);
+      if (ctx.length) why = (why ? why + '\n\n' : '') + '[' + ctx.join(' · ') + ']';
+
+      if (status) { status.style.color = 'var(--text-secondary)'; status.textContent = 'Sending your request…'; }
+      if (submitBtn) submitBtn.disabled = true;
+
+      fetch(SUPABASE_URL + '/functions/v1/request-demo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON },
+        body: JSON.stringify({ name: data.name, email: data.email, company: data.company || '', role: '', why_interested: why })
+      }).then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (body) { return { ok: res.ok, body: body }; });
+      }).then(function (r) {
+        if (!r.ok || (r.body && r.body.error)) {
+          var msg = (r.body && r.body.error === 'too_many_requests')
+            ? (r.body.detail || 'You have already requested a demo recently — we will be in touch shortly.')
+            : 'Something went wrong sending your request. Please email hello@parallaxos.com.au.';
+          if (status) { status.style.color = 'var(--status-blocked)'; status.textContent = msg; }
+          return;
+        }
+        if (status) { status.style.color = 'var(--status-cleared)'; status.textContent = 'Thanks ' + data.name + ' — your request is in. We will reply within one business day.'; }
+        form.reset();
+      }).catch(function () {
+        if (status) { status.style.color = 'var(--status-blocked)'; status.textContent = 'Network error — please email hello@parallaxos.com.au and we will sort it out.'; }
+      }).then(function () {
+        if (submitBtn) submitBtn.disabled = false;
+      });
     });
   }
 
