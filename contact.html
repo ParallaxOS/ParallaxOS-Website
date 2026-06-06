@@ -144,6 +144,14 @@
             </div>
           </div>
           <div class="form-row">
+            <label for="tier">Which tier would you like to preview? <span style="color: var(--status-blocked);">*</span></label>
+            <select id="tier" name="tier" required>
+              <option value="starter">Starter — small crews (up to ~10 workers)</option>
+              <option value="professional" selected>Professional — most teams (recommended)</option>
+              <option value="enterprise">Enterprise — unlimited workers + RTO</option>
+            </select>
+          </div>
+          <div class="form-row">
             <label for="message">What would you most like to see?</label>
             <textarea id="message" name="message" placeholder="e.g. Avetta auto-submission, FAID fatigue scoring, Edge Mode in tunnels, EBA-aware invoicing for our enterprise agreement…"></textarea>
           </div>

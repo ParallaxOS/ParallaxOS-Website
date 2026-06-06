@@ -158,7 +158,7 @@
       fetch(SUPABASE_URL + '/functions/v1/request-demo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON },
-        body: JSON.stringify({ name: data.name, email: data.email, company: data.company || '', role: '', why_interested: why })
+        body: JSON.stringify({ name: data.name, email: data.email, company: data.company || '', role: '', tier: data.tier || 'professional', why_interested: why })
       }).then(function (res) {
         return res.json().catch(function () { return {}; }).then(function (body) { return { ok: res.ok, body: body }; });
       }).then(function (r) {
