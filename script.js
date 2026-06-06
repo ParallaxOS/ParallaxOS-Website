@@ -6,6 +6,17 @@
 (function () {
   'use strict';
 
+  // ---- Skip link + main landmark (a11y) ----
+  (function () {
+    var main = document.querySelector('main');
+    if (main && !document.querySelector('.skip-link')) {
+      if (!main.id) main.id = 'main-content';
+      var sk = document.createElement('a');
+      sk.className = 'skip-link'; sk.href = '#' + main.id; sk.textContent = 'Skip to content';
+      document.body.insertBefore(sk, document.body.firstChild);
+    }
+  })();
+
   // ---- Year stamp ----
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = new Date().getFullYear();
@@ -26,6 +37,15 @@
         links.classList.remove('open');
         toggle.classList.remove('open');
       });
+    });
+    // close on Escape (a11y)
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && links.classList.contains('open')) {
+        links.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
     });
   }
 

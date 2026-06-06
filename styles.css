@@ -1262,3 +1262,12 @@ pre.code, .code-block {
   * { animation: none !important; transition: none !important; }
   .dash-frame, .orb, .reveal, .js-reveal { transform: none !important; opacity: 1 !important; }
 }
+
+/* -------- Accessibility (audit 2026-06) -------- */
+:root { --text-tertiary: rgba(255, 255, 255, 0.6); } /* lift small-caption contrast toward WCAG AA */
+a:focus-visible, button:focus-visible, .btn:focus-visible, .menu-toggle:focus-visible,
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 4px;
+}
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 200; background: var(--brand); color: #0A0F18; padding: 10px 16px; font-weight: 700; text-decoration: none; border-radius: 0 0 8px 0; }
+.skip-link:focus { left: 0; }
