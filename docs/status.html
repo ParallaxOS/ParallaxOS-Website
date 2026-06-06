@@ -69,52 +69,40 @@
       <span class="overline">Trust · System status</span>
       <h1>System status.</h1>
 
-      <div class="callout" style="display:flex; gap:14px; align-items:center; border-color: var(--status-cleared); background: rgba(16, 185, 129, 0.08);">
-        <span class="badge cleared" style="font-size: 12px;">All systems operational</span>
-        <span style="color: var(--text-secondary); font-size: 14px;">Last updated <span data-year>2026</span> — auto-refresh hourly.</span>
+      <div class="callout" style="display:flex; gap:14px; align-items:center; border-color: var(--status-warning); background: rgba(245, 158, 11, 0.08);">
+        <span class="badge warning" style="font-size: 12px;">Pilot · pre-GA</span>
+        <span style="color: var(--text-secondary); font-size: 14px;">ParallaxOS is in pilot ahead of general availability.</span>
       </div>
 
-      <p class="lede">Live operational status for the ParallaxOS platform and its integrations. Subscribe to incident notifications by email at the bottom of the page.</p>
+      <p class="lede">This page sets out the service-level targets we commit to and the integration roadmap. The figures below are <strong>targets and commitments — not live production telemetry</strong>; a real-time status feed with incident history goes live at general availability. To report an issue or subscribe to notifications, see the bottom of the page.</p>
 
-      <h2>Core services</h2>
+      <h2>Availability targets</h2>
       <table class="api-table">
-        <thead><tr><th>Service</th><th>Status</th><th>30-day uptime</th></tr></thead>
+        <thead><tr><th>Service</th><th>Availability target</th></tr></thead>
         <tbody>
-          <tr><td>Web app · app.parallaxos.com.au</td><td><span class="badge cleared">Operational</span></td><td>99.98%</td></tr>
-          <tr><td>REST API · api.parallaxos.com.au/v1</td><td><span class="badge cleared">Operational</span></td><td>99.96%</td></tr>
-          <tr><td>Worker Portal · iOS</td><td><span class="badge cleared">Operational</span></td><td>100%</td></tr>
-          <tr><td>Worker Portal · Android</td><td><span class="badge cleared">Operational</span></td><td>100%</td></tr>
-          <tr><td>Edge Mode sync engine</td><td><span class="badge cleared">Operational</span></td><td>99.99%</td></tr>
-          <tr><td>ParallaxOS AI (Claude API)</td><td><span class="badge cleared">Operational</span></td><td>99.94%</td></tr>
-          <tr><td>Push notifications (FCM / APNs)</td><td><span class="badge cleared">Operational</span></td><td>99.91%</td></tr>
+          <tr><td>Web app · app.parallaxos.com.au</td><td>99.9%</td></tr>
+          <tr><td>REST API · api.parallaxos.com.au/v1</td><td>99.9%</td></tr>
+          <tr><td>Worker &amp; Supervisor portals</td><td>99.9%</td></tr>
+          <tr><td>Edge Mode sync engine</td><td>Offline-first — functions without connectivity</td></tr>
+          <tr><td>ParallaxOS AI</td><td>Best-effort (depends on the upstream model provider)</td></tr>
         </tbody>
       </table>
 
-      <h2>Integrations</h2>
+      <h2>Integration roadmap</h2>
       <table class="api-table">
         <thead><tr><th>Integration</th><th>Status</th><th>Notes</th></tr></thead>
         <tbody>
-          <tr><td>Avetta API</td><td><span class="badge cleared">Operational</span></td><td>Direct push live · 3-second compile</td></tr>
-          <tr><td>RIW Direct Upload</td><td><span class="badge cleared">Operational</span></td><td>—</td></tr>
-          <tr><td>Xero API</td><td><span class="badge cleared">Operational</span></td><td>—</td></tr>
-          <tr><td>MYOB API</td><td><span class="badge cleared">Operational</span></td><td>—</td></tr>
-          <tr><td>Bureau of Meteorology</td><td><span class="badge cleared">Operational</span></td><td>Weather widget for shift locations</td></tr>
-          <tr><td>Uber Business API</td><td><span class="badge info">Pilot</span></td><td>Fatigue Agent dispatch — pilot deployment only</td></tr>
+          <tr><td>Avetta pack</td><td><span class="badge info">Pilot</span></td><td>3-second compile; direct API push in pilot</td></tr>
+          <tr><td>RIW Direct Upload</td><td><span class="badge warning">Planned</span></td><td>Pending the Pegasus partner API agreement</td></tr>
+          <tr><td>Xero / MYOB</td><td><span class="badge info">Pilot</span></td><td>Invoice export</td></tr>
+          <tr><td>Bureau of Meteorology</td><td><span class="badge cleared">Live</span></td><td>Weather for shift locations</td></tr>
+          <tr><td>Uber Business (Fatigue Agent dispatch)</td><td><span class="badge info">Pilot</span></td><td>Pilot deployments only</td></tr>
         </tbody>
       </table>
 
-      <h2>Recent incidents</h2>
-      <p style="color: var(--text-tertiary); font-size: 13px; font-family: var(--font-mono);">No incidents reported in the past 30 days.</p>
-
-      <h2>Scheduled maintenance</h2>
-      <p style="color: var(--text-tertiary); font-size: 13px; font-family: var(--font-mono);">No scheduled maintenance windows in the next 14 days.</p>
-
-      <h2>Subscribe to updates</h2>
-      <p>Get incident and maintenance notifications by email. Email <a href="mailto:status@parallaxos.com.au?subject=Subscribe%20to%20status%20updates">status@parallaxos.com.au</a> with &quot;subscribe&quot; in the subject line. Enterprise customers also receive notifications via configured webhooks.</p>
-
-      <h2>Service Level Targets</h2>
+      <h2>Service-level targets by tier</h2>
       <table class="api-table">
-        <thead><tr><th>Tier</th><th>Monthly uptime target</th><th>Support response SLA</th></tr></thead>
+        <thead><tr><th>Tier</th><th>Monthly uptime target</th><th>Support response</th></tr></thead>
         <tbody>
           <tr><td>Starter</td><td>99.5%</td><td>1 business day</td></tr>
           <tr><td>Professional</td><td>99.5%</td><td>4 hours (priority)</td></tr>
@@ -122,7 +110,8 @@
         </tbody>
       </table>
 
-      <p style="color: var(--text-tertiary); font-size: 12px; margin-top: 32px;">Status page powered by internal monitoring (Sentry · PostHog · uptime probes from Sydney, Melbourne, and Brisbane). Edge Mode sync is reported per-tenant in the customer dashboard.</p>
+      <h2>Report an issue / subscribe</h2>
+      <p>To report a problem, or to get incident and maintenance notifications, email <a href="mailto:status@parallaxos.com.au?subject=ParallaxOS%20status">status@parallaxos.com.au</a>. A real-time status feed and incident history go live at general availability.</p>
 
       <div class="next-prev">
         <a href="terms.html"><small>← Previous</small><b>Terms</b></a>
