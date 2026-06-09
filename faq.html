@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FAQ — ParallaxOS</title>
+<meta name="description" content="Answers to the common questions about ParallaxOS — the compliance gate, fatigue, sovereign Australian hosting, RTO/AVETMISS, security, integrations, offline Edge Mode, and the human-approved AI.">
+<meta name="theme-color" content="#0B1929">
+<link rel="canonical" href="https://www.parallaxos.com.au/faq.html">
+<meta property="og:title" content="FAQ — ParallaxOS">
+<meta property="og:description" content="Answers to the common questions about ParallaxOS — the compliance gate, fatigue, sovereign Australian hosting, RTO/AVETMISS, security, integrations, offline Edge Mode, and the human-approved AI.">
+<meta property="og:url" content="https://www.parallaxos.com.au/faq.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.parallaxos.com.au/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FAQ — ParallaxOS">
+<meta name="twitter:description" content="Answers to the common questions about ParallaxOS — compliance, fatigue, sovereignty, security, integrations, offline and AI.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230B1929'/%3E%3Cg stroke='%23FF6B00' stroke-width='2' fill='none' stroke-linejoin='round'%3E%3Cpath d='M32 12 L46 20 L46 36 L32 52 L18 36 L18 20 Z'/%3E%3Cpath d='M32 12 L32 52 M18 20 L46 36 M18 36 L46 20' stroke='%23FFFFFF' stroke-width='1.5' opacity='0.85'/%3E%3Ccircle cx='32' cy='12' r='2' fill='%23FF6B00'/%3E%3Ccircle cx='46' cy='20' r='2' fill='%23FFFFFF'/%3E%3Ccircle cx='46' cy='36' r='2' fill='%23FFFFFF'/%3E%3Ccircle cx='32' cy='52' r='2' fill='%23FF6B00'/%3E%3Ccircle cx='18' cy='36' r='2' fill='%23FF6B00'/%3E%3Ccircle cx='18' cy='20' r='2' fill='%23FF6B00'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "What is ParallaxOS?", "acceptedAnswer": { "@type": "Answer", "text": "A sovereign rail-compliance, scheduling and AI platform for Australian rail subcontractors. It puts RIW cards, rail medicals, drug & alcohol testing, fatigue, site inductions, competencies, scheduling, timesheets, invoicing and RTO/AVETMISS into one system — so a worker is only ever allocated to a shift they are genuinely cleared for." } },
+    { "@type": "Question", "name": "Who is it for?", "acceptedAnswer": { "@type": "Answer", "text": "Australian rail subcontractors and labour-hire crews working across networks like ARTC, Sydney Trains, Aurizon and TfNSW, plus the AHP medical and RIW recertification networks. It also runs the student side for RTOs delivering rail qualifications." } },
+    { "@type": "Question", "name": "How does the compliance gate actually work?", "acceptedAnswer": { "@type": "Answer", "text": "Every shift allocation runs a six-clause eligibility check against a live, per-worker compliance snapshot: a current RIW card, an in-date rail medical (including the right medical category for the work), recent drug & alcohol clearance, cumulative-hours fatigue, the required site/network inductions, and the required competencies. A non-compliant allocation is blocked — with a signed, fully audited override path for genuine emergencies." } },
+    { "@type": "Question", "name": "How is fatigue calculated?", "acceptedAnswer": { "@type": "Answer", "text": "From real electronic-work-diary hours over rolling 24-hour, 48-hour and 7-day windows (HVNL-style caps that each tenant can tighten). The check includes the hours of the shift being proposed and a minimum-rest-before-shift rule, so a worker who is near the cap can't be pushed over by the new shift. FAID Quantum certified scoring can be layered in once that licence is in place." } },
+    { "@type": "Question", "name": "Where does RIW / medical / D&A data come from?", "acceptedAnswer": { "@type": "Answer", "text": "Cards, clearances and test results are held per worker and drive the gate directly. The platform is built to sync from the Pegasus/RIW and AHP medical networks once connector credentials are issued; until then those records are maintained in-app, and the gate behaves identically either way." } },
+    { "@type": "Question", "name": "Does it handle RTO training and AVETMISS?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. For registered training organisations it manages students, enrolments and completions, verifies USIs, and generates compliant AVETMISS NAT files for reporting — with student personal information encrypted at rest." } },
+    { "@type": "Question", "name": "Where is my data hosted, and is it sovereign?", "acceptedAnswer": { "@type": "Answer", "text": "Entirely in Australia: PostgreSQL in AWS Sydney (ap-southeast-2). Tenants are isolated at the database itself with row-level security on every table, sensitive PII is encrypted at rest under a vault-held key, and every change is written to an append-only, SHA-256 hash-chained audit log that makes tampering detectable." } },
+    { "@type": "Question", "name": "How secure is it?", "acceptedAnswer": { "@type": "Answer", "text": "Per-tenant row-level security on every table, encrypted PII, a tamper-evident hash-chained audit trail, multi-factor authentication, and a live security & trust dashboard. The platform is being built against ISO 27001 and SOC 2 evidence requirements." } },
+    { "@type": "Question", "name": "What does it integrate with?", "acceptedAnswer": { "@type": "Answer", "text": "Accounting via Xero, contractor-compliance networks like Avetta, and email/SMS notifications — all through a durable integration outbox that retries safely and never double-sends, so an outage at a vendor never loses or duplicates a push." } },
+    { "@type": "Question", "name": "Does it work offline and on desktop?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. There is an installable Windows desktop app and an offline-capable progressive web app for field crews with poor signal. Pre-starts and signed timesheets are captured on-device and sync when connectivity returns." } },
+    { "@type": "Question", "name": "Is there AI, and is it safe to let it act?", "acceptedAnswer": { "@type": "Answer", "text": "There is a grounded AI assistant that answers from your own documents, drafts SWMS and tender responses, and can propose operational actions. Crucially, AI never acts on its own: every proposed action is staged for a human to approve or reject before anything happens, and that decision is recorded in the audit trail." } },
+    { "@type": "Question", "name": "How do I try it?", "acceptedAnswer": { "@type": "Answer", "text": "Request a tailored demo — it adapts to your company's branding and public profile — or take the self-serve guided tour as an Admin, Supervisor or Worker. No real customer data is ever used in the demo." } }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="edge-banner" role="status" aria-live="polite">Edge Mode active: data sealed locally</div>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html" aria-label="ParallaxOS — Sovereign Compliance OS"><img class="brand-logo" src="assets/parallaxos-nav.png" alt="ParallaxOS" width="147" height="48" decoding="async"></a>
+    <nav>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="faq.html" aria-current="page">FAQ</a></li>
+        <li><a href="docs/index.html">Docs</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="https://app.parallaxos.com.au/" rel="noopener">Log in</a>
+      <a class="btn btn-primary btn-sm" href="contact.html#demo">Book a demo</a>
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <header class="page-header">
+    <div class="container">
+      <span class="eyebrow"><span class="dot"></span> Questions, answered</span>
+      <h1>Everything you'd ask <span class="gradient-text">before a demo.</span></h1>
+      <p>Straight answers about how the compliance gate works, where your data lives, how fatigue is calculated, and what the AI is — and isn't — allowed to do. Prefer to hear it? The same answers are narrated inside the live guided tour.</p>
+    </div>
+  </header>
+
+  <section class="section" id="faq">
+    <div class="container faq-wrap">
+
+      <details class="faq-item" open>
+        <summary>What is ParallaxOS?</summary>
+        <div class="faq-a">
+          <p>A sovereign rail-compliance, scheduling and AI platform for Australian rail subcontractors. It puts RIW cards, rail medicals, drug &amp; alcohol testing, fatigue, site inductions, competencies, scheduling, timesheets, invoicing and RTO/AVETMISS into one system — so a worker is only ever allocated to a shift they are genuinely cleared for.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Who is it for?</summary>
+        <div class="faq-a">
+          <p>Australian rail subcontractors and labour-hire crews working across networks like ARTC, Sydney Trains, Aurizon and TfNSW, plus the AHP medical and RIW recertification networks. It also runs the student side for RTOs delivering rail qualifications.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>How does the compliance gate actually work?</summary>
+        <div class="faq-a">
+          <p>Every shift allocation runs a six-clause eligibility check against a live, per-worker compliance snapshot: a current RIW card, an in-date rail medical (including the right medical category for the work), recent drug &amp; alcohol clearance, cumulative-hours fatigue, the required site/network inductions, and the required competencies. A non-compliant allocation is blocked — with a signed, fully audited override path for genuine emergencies.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>How is fatigue calculated?</summary>
+        <div class="faq-a">
+          <p>From real electronic-work-diary hours over rolling 24-hour, 48-hour and 7-day windows (HVNL-style caps that each tenant can tighten). The check includes the hours of the shift being proposed and a minimum-rest-before-shift rule, so a worker who is near the cap can't be pushed over by the new shift. FAID Quantum certified scoring can be layered in once that licence is in place.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Where does RIW / medical / D&amp;A data come from?</summary>
+        <div class="faq-a">
+          <p>Cards, clearances and test results are held per worker and drive the gate directly. The platform is built to sync from the Pegasus/RIW and AHP medical networks once connector credentials are issued; until then those records are maintained in-app, and the gate behaves identically either way.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does it handle RTO training and AVETMISS?</summary>
+        <div class="faq-a">
+          <p>Yes. For registered training organisations it manages students, enrolments and completions, verifies USIs, and generates compliant AVETMISS NAT files for reporting — with student personal information encrypted at rest.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Where is my data hosted, and is it sovereign?</summary>
+        <div class="faq-a">
+          <p>Entirely in Australia: PostgreSQL in AWS Sydney (ap-southeast-2). Tenants are isolated at the database itself with row-level security on every table, sensitive PII is encrypted at rest under a vault-held key, and every change is written to an append-only, SHA-256 hash-chained audit log that makes tampering detectable.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>How secure is it?</summary>
+        <div class="faq-a">
+          <p>Per-tenant row-level security on every table, encrypted PII, a tamper-evident hash-chained audit trail, multi-factor authentication, and a live security &amp; trust dashboard. The platform is being built against ISO 27001 and SOC 2 evidence requirements.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>What does it integrate with?</summary>
+        <div class="faq-a">
+          <p>Accounting via Xero, contractor-compliance networks like Avetta, and email/SMS notifications — all through a durable integration outbox that retries safely and never double-sends, so an outage at a vendor never loses or duplicates a push.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does it work offline and on desktop?</summary>
+        <div class="faq-a">
+          <p>Yes. There is an installable Windows desktop app and an offline-capable progressive web app for field crews with poor signal. Pre-starts and signed timesheets are captured on-device and sync when connectivity returns.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Is there AI, and is it safe to let it act?</summary>
+        <div class="faq-a">
+          <p>There is a grounded AI assistant that answers from your own documents, drafts SWMS and tender responses, and can propose operational actions. Crucially, AI never acts on its own: every proposed action is staged for a human to approve or reject before anything happens, and that decision is recorded in the audit trail.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>How do I try it?</summary>
+        <div class="faq-a">
+          <p>Request a tailored demo — it adapts to your company's branding and public profile — or take the self-serve guided tour as an Admin, Supervisor or Worker. No real customer data is ever used in the demo.</p>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <h2>Still have a question?</h2>
+        <p>Take the self-serve guided tour with the same answers narrated, or book a 30-minute demo and ask us directly.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://app.demo.parallaxos.com.au/" rel="noopener">Take the guided tour</a>
+          <a class="btn btn-ghost" href="contact.html#demo">Book a 30-minute demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="ParallaxOS — Sovereign Compliance OS"><img class="brand-logo" src="assets/parallaxos-nav.png" alt="ParallaxOS" width="147" height="48" decoding="async"></a>
+        <p>The sovereign compliance operating system for Australian rail subcontractors. Built by Parallax Industries Pty Ltd in the Hunter Valley.</p>
+        <div class="acn">Parallax Industries Pty Ltd · ACN 695 665 635</div>
+      </div>
+      <div class="footer-col"><h4>Product</h4><ul><li><a href="features.html">Features</a></li><li><a href="features.html#ai">AI Agents</a></li><li><a href="features.html#edge-mode">Edge Mode</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="features.html#avetta">Avetta integration</a></li></ul></div>
+      <div class="footer-col"><h4>Documentation</h4><ul><li><a href="docs/index.html">Overview</a></li><li><a href="docs/getting-started.html">Getting started</a></li><li><a href="docs/portals.html">Three portals</a></li><li><a href="docs/ai-agents.html">AI agents</a></li><li><a href="docs/api.html">API reference</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Parallax</a></li><li><a href="faq.html">FAQ</a></li><li><a href="about.html#mission">Mission</a></li><li><a href="contact.html#demo">Book a demo</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Networks</h4><ul><li>ARTC · Aurizon · TfNSW</li><li>Sydney Metro · QR · V/Line</li><li>MTM · MTS · PTA</li><li>Adelaide Metro · Arc Infrastructure</li><li>BHP rail</li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Parallax Industries Pty Ltd. All rights reserved.</span>
+      <div class="legal"><a href="docs/privacy.html">Privacy</a><a href="docs/terms.html">Terms</a><a href="docs/security.html">Security</a><a href="docs/status.html">Status</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>

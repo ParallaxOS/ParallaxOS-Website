@@ -3,6 +3,7 @@
   <url><loc>https://www.parallaxos.com.au/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://www.parallaxos.com.au/features.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.parallaxos.com.au/pricing.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.parallaxos.com.au/faq.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.parallaxos.com.au/about.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.parallaxos.com.au/contact.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.parallaxos.com.au/docs/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
