@@ -122,6 +122,17 @@
           </div>
           <div class="form-grid-2">
             <div class="form-row">
+              <label for="website">Company website <span style="color: var(--status-blocked);">*</span></label>
+              <input type="url" id="website" name="website" required autocomplete="url" placeholder="https://yourcompany.com.au">
+            </div>
+            <div class="form-row">
+              <label for="industry">Industry / sector</label>
+              <input type="text" id="industry" name="industry" placeholder="e.g. rail signalling, civil, vegetation">
+            </div>
+          </div>
+          <p style="font-size: 12px; color: var(--text-secondary); margin: -6px 0 2px;">We read your website (and any socials below) to tailor the demo to your business — your services, terminology, and the kind of work you do.</p>
+          <div class="form-grid-2">
+            <div class="form-row">
               <label for="workers">Worker count</label>
               <select id="workers" name="workers">
                 <option value="1-5">1–5 workers</option>
@@ -159,6 +170,15 @@
           <div class="form-row">
             <label for="message">What would you most like to see?</label>
             <textarea id="message" name="message" placeholder="e.g. Generate Avetta Compliance Report, FAID fatigue scoring, Edge Mode in tunnels, EBA-aware invoicing for our enterprise agreement…"></textarea>
+          </div>
+          <div class="form-row">
+            <label for="social_links">Social media (optional — LinkedIn, Facebook, Instagram)</label>
+            <textarea id="social_links" name="social_links" rows="2" placeholder="https://linkedin.com/company/yourcompany"></textarea>
+          </div>
+          <div class="form-row">
+            <label for="logo">Company logo (optional — appears on your tailored demo)</label>
+            <input type="file" id="logo" name="logo" accept="image/png,image/jpeg,image/webp">
+            <p style="font-size: 12px; color: var(--text-secondary); margin: 6px 0 0;">PNG, JPEG or WebP, up to 4&nbsp;MB. Your logo brands your demo — "your logo, powered by ParallaxOS".</p>
           </div>
           <div class="form-row" style="display: flex; flex-direction: row; gap: 10px; align-items: center;">
             <input type="checkbox" id="consent" name="consent" required style="width:auto; min-height:auto;">

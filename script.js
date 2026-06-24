@@ -139,43 +139,72 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var data = Object.fromEntries(new FormData(form));
-      if (!data.name || !data.email) {
-        if (status) { status.textContent = 'Please complete all required fields.'; status.style.color = 'var(--status-blocked)'; }
+      if (!data.name || !data.email || !data.website) {
+        if (status) { status.textContent = 'Please complete your name, email and company website.'; status.style.color = 'var(--status-blocked)'; }
         return;
       }
-      // The function stores name/email/company/role/why_interested — fold the
-      // extra fields (worker count, networks, mobile) into why_interested.
+      // request-demo stores name/email/company/role/why_interested + the
+      // adaptive-demo fields (website_url, social_links, industry, logo) that
+      // drive the website/social deep-dive and the co-branded demo. Fold the
+      // remaining extras (worker count, networks, mobile, org type) into
+      // why_interested so nothing is lost.
       var why = (data.message || '').trim();
       var ctx = [];
       if (data.workers)  ctx.push('Workers: ' + data.workers);
       if (data.networks) ctx.push('Networks: ' + data.networks);
       if (data.phone)    ctx.push('Mobile: ' + data.phone);
+      if (data.orgtype)  ctx.push('Org type: ' + data.orgtype);
       if (ctx.length) why = (why ? why + '\n\n' : '') + '[' + ctx.join(' · ') + ']';
+
+      // Read the optional logo to a data URL (≤ 4 MB) before sending. The logo
+      // is optional — a read failure just sends the request without it.
+      var logoInput = form.querySelector('#logo');
+      var file = logoInput && logoInput.files && logoInput.files[0];
+      if (file && file.size > 4 * 1024 * 1024) {
+        if (status) { status.style.color = 'var(--status-blocked)'; status.textContent = 'Logo must be under 4 MB.'; }
+        return;
+      }
 
       if (status) { status.style.color = 'var(--text-secondary)'; status.textContent = 'Sending your request…'; }
       if (submitBtn) submitBtn.disabled = true;
 
-      fetch(SUPABASE_URL + '/functions/v1/request-demo', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON },
-        body: JSON.stringify({ name: data.name, email: data.email, company: data.company || '', role: '', tier: data.tier || 'professional', why_interested: why })
-      }).then(function (res) {
-        return res.json().catch(function () { return {}; }).then(function (body) { return { ok: res.ok, body: body }; });
-      }).then(function (r) {
-        if (!r.ok || (r.body && r.body.error)) {
-          var msg = (r.body && r.body.error === 'too_many_requests')
-            ? (r.body.detail || 'You have already requested a demo recently — we will be in touch shortly.')
-            : 'Something went wrong sending your request. Please email hello@parallaxos.com.au.';
-          if (status) { status.style.color = 'var(--status-blocked)'; status.textContent = msg; }
-          return;
-        }
-        if (status) { status.style.color = 'var(--status-cleared)'; status.textContent = 'Thanks ' + data.name + ' — your request is in. We will reply within one business day.'; }
-        form.reset();
-      }).catch(function () {
-        if (status) { status.style.color = 'var(--status-blocked)'; status.textContent = 'Network error — please email hello@parallaxos.com.au and we will sort it out.'; }
-      }).then(function () {
-        if (submitBtn) submitBtn.disabled = false;
-      });
+      function send(logoData, logoName) {
+        fetch(SUPABASE_URL + '/functions/v1/request-demo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON },
+          body: JSON.stringify({
+            name: data.name, email: data.email, company: data.company || '', role: '',
+            tier: data.tier || 'professional', why_interested: why,
+            website_url: data.website, social_links: data.social_links || '', industry: data.industry || '',
+            logo_data: logoData || '', logo_name: logoName || ''
+          })
+        }).then(function (res) {
+          return res.json().catch(function () { return {}; }).then(function (body) { return { ok: res.ok, body: body }; });
+        }).then(function (r) {
+          if (!r.ok || (r.body && r.body.error)) {
+            var msg = (r.body && r.body.error === 'too_many_requests')
+              ? (r.body.detail || 'You have already requested a demo recently — we will be in touch shortly.')
+              : ((r.body && r.body.detail) || 'Something went wrong sending your request. Please email support@parallaxos.com.au.');
+            if (status) { status.style.color = 'var(--status-blocked)'; status.textContent = msg; }
+            return;
+          }
+          if (status) { status.style.color = 'var(--status-cleared)'; status.textContent = 'Thanks ' + data.name + ' — your request is in. We will reply within one business day with your tailored demo login.'; }
+          form.reset();
+        }).catch(function () {
+          if (status) { status.style.color = 'var(--status-blocked)'; status.textContent = 'Network error — please email support@parallaxos.com.au and we will sort it out.'; }
+        }).then(function () {
+          if (submitBtn) submitBtn.disabled = false;
+        });
+      }
+
+      if (file) {
+        var reader = new FileReader();
+        reader.onload  = function () { send(String(reader.result || ''), file.name); };
+        reader.onerror = function () { send('', ''); };  // logo optional — send without it
+        reader.readAsDataURL(file);
+      } else {
+        send('', '');
+      }
     });
   }
 
