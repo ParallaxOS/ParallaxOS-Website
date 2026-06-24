@@ -31,7 +31,7 @@
     <nav>
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="features.html">Features</a></li><li><a href="rto.html">For RTOs</a></li>
+        <li><a href="features.html">Features</a></li>
         <li><a href="pricing.html">Pricing</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="docs/index.html">Docs</a></li>
@@ -106,8 +106,8 @@
               <input type="text" id="name" name="name" required autocomplete="name" placeholder="Aaron Smith">
             </div>
             <div class="form-row">
-              <label for="company">Company</label>
-              <input type="text" id="company" name="company" autocomplete="organization" placeholder="Northline Rail Services Pty Ltd">
+              <label for="company">Company <span style="color: var(--status-blocked);">*</span></label>
+              <input type="text" id="company" name="company" required autocomplete="organization" placeholder="Northline Rail Services Pty Ltd">
             </div>
           </div>
           <div class="form-grid-2">
@@ -116,8 +116,8 @@
               <input type="email" id="email" name="email" required autocomplete="email" placeholder="aaron@yourcompany.com.au">
             </div>
             <div class="form-row">
-              <label for="phone">Mobile</label>
-              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="04xx xxx xxx">
+              <label for="phone">Mobile <span style="color: var(--status-blocked);">*</span></label>
+              <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="04xx xxx xxx">
             </div>
           </div>
           <div class="form-grid-2">
@@ -146,30 +146,19 @@
           </div>
           <div class="form-row">
             <label for="orgtype">Organisation type</label>
-            <select id="orgtype" name="orgtype">
-              <option value="rail" selected>Rail subcontractor</option>
-              <option value="rto">RTO — training delivery</option>
-              <option value="both">Both — subcontractor + RTO</option>
-            </select>
+            <input type="text" id="orgtype" name="orgtype" placeholder="e.g. Rail subcontractor">
           </div>
           <div class="form-row">
             <label for="tier">Which tier would you like to preview? <span style="color: var(--status-blocked);">*</span></label>
             <select id="tier" name="tier" required>
-              <optgroup label="Rail subcontractor">
-                <option value="starter">Starter — small crews (up to ~10 workers)</option>
-                <option value="professional" selected>Professional — most teams (recommended)</option>
-                <option value="enterprise">Enterprise — unlimited workers</option>
-              </optgroup>
-              <optgroup label="RTO — training delivery">
-                <option value="rto-lite">RTO Lite — small single-RTO operators</option>
-                <option value="rto-pro">RTO Pro — mid-size rail-training RTOs</option>
-                <option value="rto-enterprise">RTO Enterprise — in-house / multi-code</option>
-              </optgroup>
+              <option value="starter">Starter — small crews (up to ~10 workers)</option>
+              <option value="professional" selected>Professional — most teams (recommended)</option>
+              <option value="enterprise">Enterprise — unlimited workers</option>
             </select>
           </div>
           <div class="form-row">
             <label for="message">What would you most like to see?</label>
-            <textarea id="message" name="message" placeholder="e.g. Avetta auto-submission, FAID fatigue scoring, Edge Mode in tunnels, EBA-aware invoicing for our enterprise agreement…"></textarea>
+            <textarea id="message" name="message" placeholder="e.g. Generate Avetta Compliance Report, FAID fatigue scoring, Edge Mode in tunnels, EBA-aware invoicing for our enterprise agreement…"></textarea>
           </div>
           <div class="form-row" style="display: flex; flex-direction: row; gap: 10px; align-items: center;">
             <input type="checkbox" id="consent" name="consent" required style="width:auto; min-height:auto;">
@@ -261,7 +250,7 @@
         <p>The sovereign compliance operating system for Australian rail subcontractors. Built by Parallax Industries Pty Ltd in the Hunter Valley.</p>
         <div class="acn">Parallax Industries Pty Ltd · ACN 695 665 635</div>
       </div>
-      <div class="footer-col"><h4>Product</h4><ul><li><a href="features.html">Features</a></li><li><a href="rto.html">For RTOs</a></li><li><a href="features.html#ai">AI Agents</a></li><li><a href="features.html#edge-mode">Edge Mode</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="features.html#avetta">Avetta integration</a></li></ul></div>
+      <div class="footer-col"><h4>Product</h4><ul><li><a href="features.html">Features</a></li><li><a href="features.html#ai">AI Agents</a></li><li><a href="features.html#edge-mode">Edge Mode</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="features.html#avetta">Avetta integration</a></li></ul></div>
       <div class="footer-col"><h4>Documentation</h4><ul><li><a href="docs/index.html">Overview</a></li><li><a href="docs/getting-started.html">Getting started</a></li><li><a href="docs/portals.html">Three portals</a></li><li><a href="docs/ai-agents.html">AI agents</a></li><li><a href="docs/api.html">API reference</a></li></ul></div>
       <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Parallax</a></li><li><a href="about.html#mission">Mission</a></li><li><a href="about.html#team">Team</a></li><li><a href="contact.html#demo">Book a demo</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div class="footer-col"><h4>Networks</h4><ul><li>ARTC · Aurizon · TfNSW</li><li>Sydney Metro · QR · V/Line</li><li>MTM · MTS · PTA</li><li>Adelaide Metro · Arc Infrastructure</li><li>BHP rail</li></ul></div>
@@ -274,20 +263,5 @@
 </footer>
 
 <script src="script.js" defer></script>
-<script>
-  // Preselect organisation type + tier from the query string (e.g. the
-  // "Book an RTO demo" CTAs link to contact.html?org=rto&tier=rto-pro#demo)
-  // and reframe the demo heading for RTO visitors.
-  (function () {
-    var p = new URLSearchParams(location.search);
-    var org = p.get('org'), tier = p.get('tier');
-    if (org) { var o = document.getElementById('orgtype'); if (o && ['rail', 'rto', 'both'].indexOf(org) > -1) o.value = org; }
-    if (tier) { var t = document.getElementById('tier'); if (t) { t.value = tier; } }
-    if (org === 'rto' || org === 'both') {
-      var eb = document.getElementById('demo-eyebrow'); if (eb) eb.lastChild.textContent = ' Book an RTO demo';
-      var h = document.getElementById('demo-h2'); if (h) h.textContent = 'Tell us about your RTO.';
-    }
-  })();
-</script>
 </body>
 </html>
