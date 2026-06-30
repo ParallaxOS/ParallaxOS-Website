@@ -4,17 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Avetta integration — ParallaxOS Docs</title>
-<meta name="description" content="How the Avetta Compliance Report is generated and pushed to Avetta from ParallaxOS — verified hours, TRIFR, LTIFR, incident summary, D&A records, insurance status. Three seconds, one click.">
+<meta name="description" content="How the Avetta Compliance Report is generated for upload to Avetta from ParallaxOS — verified hours, TRIFR, LTIFR, incident summary, D&A records, insurance status. Three seconds, one click.">
 <meta name="theme-color" content="#0B1929">
 <link rel="canonical" href="https://www.parallaxos.com.au/docs/avetta.html">
 <meta property="og:title" content="Avetta integration — ParallaxOS Docs">
-<meta property="og:description" content="How the Avetta Compliance Report is generated and pushed to Avetta from ParallaxOS — verified hours, TRIFR, LTIFR, incident summary, D&A records, insurance status. Three seconds, one click.">
+<meta property="og:description" content="How the Avetta Compliance Report is generated for upload to Avetta from ParallaxOS — verified hours, TRIFR, LTIFR, incident summary, D&A records, insurance status. Three seconds, one click.">
 <meta property="og:url" content="https://www.parallaxos.com.au/docs/avetta.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://www.parallaxos.com.au/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Avetta integration — ParallaxOS Docs">
-<meta name="twitter:description" content="How the Avetta Compliance Report is generated and pushed to Avetta from ParallaxOS — verified hours, TRIFR, LTIFR, incident summary, D&A records, insurance status. Three seconds, one click.">
+<meta name="twitter:description" content="How the Avetta Compliance Report is generated for upload to Avetta from ParallaxOS — verified hours, TRIFR, LTIFR, incident summary, D&A records, insurance status. Three seconds, one click.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230B1929'/%3E%3Cg stroke='%23FF6B00' stroke-width='2' fill='none' stroke-linejoin='round'%3E%3Cpath d='M32 12 L46 20 L46 36 L32 52 L18 36 L18 20 Z'/%3E%3Cpath d='M32 12 L32 52 M18 20 L46 36 M18 36 L46 20' stroke='%23FFFFFF' stroke-width='1.5' opacity='0.85'/%3E%3Ccircle cx='32' cy='12' r='2' fill='%23FF6B00'/%3E%3Ccircle cx='46' cy='20' r='2' fill='%23FFFFFF'/%3E%3Ccircle cx='46' cy='36' r='2' fill='%23FFFFFF'/%3E%3Ccircle cx='32' cy='52' r='2' fill='%23FF6B00'/%3E%3Ccircle cx='18' cy='36' r='2' fill='%23FF6B00'/%3E%3Ccircle cx='18' cy='20' r='2' fill='%23FF6B00'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,17 +104,17 @@
 <span class="k">step 7:</span>  Format to Avetta submission template
 <span class="k">step 8:</span>  Sign with company key, sign with platform key
 <span class="k">step 9:</span>  Render preview UI
-<span class="k">step 10:</span> Optional: push to Avetta API on confirm</pre>
+<span class="k">step 10:</span> Export submission-ready PDF + ZIP for upload to Avetta</pre>
 
       <p>Total time on the Hunter Valley reference dataset, end-to-end: under three seconds.</p>
 
       <h2>API push (Professional &amp; Enterprise)</h2>
       <p>On confirmation, ParallaxOS pushes the assembled report directly to your Avetta account via the Avetta REST API. Zero manual upload, zero data re-entry.</p>
 
-      <p>To enable: navigate to <strong>Settings → Integrations → Avetta</strong>, paste your Avetta API key, click <strong>Verify connection</strong>. Once verified, the Reports page shows a one-click <strong>Push to Avetta</strong> button.</p>
+      <p>The Reports page generates a submission-ready Avetta Compliance Report (PDF + ZIP) that you download and upload to the Avetta portal. Direct API push — <strong>Settings → Integrations → Avetta</strong> — is on the roadmap.</p>
 
       <div class="callout">
-        On the Starter tier, the Avetta Compliance Report is generated as a downloadable PDF + ZIP that you upload manually to the Avetta portal. The auto-push is part of Professional and Enterprise.
+        The Avetta Compliance Report is generated as a downloadable PDF + ZIP that you upload to the Avetta portal. Direct API auto-push is on the roadmap.
       </div>
 
       <h2>Real example — February 2026</h2>
@@ -155,7 +155,7 @@
       <p>Beyond the Avetta Compliance Report, Avetta operates an annual ESG PQF score (0–100). The platform's ESG agent surfaces your current score and recommends actions to improve it. The Hunter Valley reference dataset is at 72/100 with a documented path to 85/100.</p>
 
       <h2>What about other supply-chain platforms?</h2>
-      <p>Many Tier 1 rail clients use Avetta, but not all. Avetta auto-push is the flagship integration on Professional. Enterprise customers can configure webhooks to push the same data to alternative platforms (Pegasus, ComplyWorks, custom client portals) — or use the public REST API to build their own flow.</p>
+      <p>Many Tier 1 rail clients use Avetta, but not all. The Avetta Compliance Report export is the flagship integration. Enterprise customers can use the public REST API or webhooks to push the same data to alternative platforms (Pegasus, ComplyWorks, custom client portals), or build their own flow.</p>
 
       <div class="next-prev">
         <a href="edge-mode.html"><small>← Previous</small><b>Edge Mode</b></a>
